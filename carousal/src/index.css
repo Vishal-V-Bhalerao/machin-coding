@@ -1,0 +1,48 @@
+:root {
+  --primary-color: #010626;
+  --secondary-color: #324359;
+  --default-color: #b6bfbd;
+}
+
+.root {
+  display: flex;
+  justify-content: center;
+}
+
+.image_holder {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  position: relative;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.image_holder::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.right_button {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  height: 40px;
+  width: 40px;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.left_button {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 40px;
+  width: 40px;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.image_frame {
+  width: fit-content;
+  position: relative;
+}
