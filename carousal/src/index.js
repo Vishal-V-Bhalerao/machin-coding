@@ -4,58 +4,43 @@ const imageArray = ['src/assets/image_1.jpg','src/assets/image_2.jpg','src/asset
 class Carousel {
     imageArray = []
     container = null
-    height = '500px'
-    width = '500px'
+    height = 500
+    width = 500
     currentIndex = 0
     imageHolder = null
     imageFrame = null
     constructor(imageArray = [], rootElement, height, width){
         this.imageArray = imageArray
         this.container = rootElement
+        this.height = height
+        this.width = width
         this.imageHolder = document.createElement('div')
         this.imageFrame = document.createElement('div')
-        this.imageHolder.style.width = this.width
-        this.imageHolder.style.height = this.height
+        this.imageFrame.style.width = this.width + 'px'
+        this.imageFrame.style.height = this.height + 'px'
         this.imageHolder.classList.add('image_holder') 
         this.imageFrame.classList.add('image_frame')
         this.crateImageCarousel()
         this.createScrollButtons()
-        this.selectImageByLeft = this.selectImageByLeft.bind(this)
-        this.selectImageByRight = this.selectImageByRight.bind(this)
+        this.selectImageByID = this.selectImageByID.bind(this)
     }
 
-    selectImageByLeft(e, index){
+    selectImageByID(e, index) {
         let selectedIndex = index 
         if(selectedIndex >= this.imageArray.length){
             selectedIndex = 0
         }
         if( selectedIndex < 0 ){
-            selectedIndex = this.imageArray.length
+            selectedIndex = this.imageArray.length - 1
         }
-        console.log(e.target.parentNode.scrollLeft)
-        if(this.imageHolder.scrollLeft !== undefined){
-            this.imageHolder.scrollLeft -= 500
-        } 
-    }
-
-    selectImageByRight(e, index){
-        let selectedIndex = index 
-        if(selectedIndex >= this.imageArray.length){
-            selectedIndex = 0
-        }
-        if( selectedIndex < 0 ){
-            selectedIndex = this.imageArray.length
-        }
-        console.log(e.target.parentNode.scrollLeft)
-        if(this.imageHolder.scrollLeft !== undefined){
-            this.imageHolder.scrollLeft += 500
-        } 
+        this.imageHolder.style.transform = `translateX(${(-selectedIndex) * this.width}px)`
+        this.currentIndex = selectedIndex
     }
     crateImageCarousel() {
         this.imageArray.map((image) => {
             const imageItem = document.createElement('img')
-            imageItem.style.width = this.width
-            imageItem.style.height = this.height
+            imageItem.style.width = this.width + 'px'
+            imageItem.style.height = this.height + 'px'
             imageItem.src = image
             this.imageHolder.appendChild(imageItem)
         })
@@ -66,12 +51,12 @@ class Carousel {
         const leftSelectButton = document.createElement('button')
         leftSelectButton.innerHTML = '<'
         leftSelectButton.classList.add('left_button')
-        leftSelectButton.addEventListener('click', (e) => this.selectImageByLeft(e, this.currentIndex - 1))
+        leftSelectButton.addEventListener('click', (e) => this.selectImageByID(e, this.currentIndex - 1))
 
         const rightSelectButton = document.createElement('button')
         rightSelectButton.classList.add('right_button')
         rightSelectButton.innerHTML = '>'
-        rightSelectButton.addEventListener('click', (e) => this.selectImageByRight(e, this.currentIndex + 1))
+        rightSelectButton.addEventListener('click', (e) => this.selectImageByID(e, this.currentIndex + 1))
 
         this.imageFrame.appendChild(leftSelectButton)
         this.imageFrame.appendChild(rightSelectButton)
@@ -79,4 +64,4 @@ class Carousel {
 
 }
 
-new Carousel(imageArray, carouselRoot, '700px', '700px')
+new Carousel(imageArray, carouselRoot, 700, 700)

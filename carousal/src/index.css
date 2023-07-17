@@ -9,17 +9,14 @@
   justify-content: center;
 }
 
-.image_holder {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: scroll;
+.image_frame {
   position: relative;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
+  overflow: hidden;
 }
 
-.image_holder::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
+.image_holder {
+  display: flex;
+  transition: 0.1s all;
 }
 
 .right_button {
@@ -40,9 +37,4 @@
   width: 40px;
   padding: 10px;
   border-radius: 50%;
-}
-
-.image_frame {
-  width: fit-content;
-  position: relative;
 }
