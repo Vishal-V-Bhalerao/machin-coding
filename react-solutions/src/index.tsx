@@ -1,9 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import * as React from "react";
+import * as ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./state/store";
+
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
+import FileExplorer from "./pages/file-explorer";
 
 const rootEle = document.getElementById("root");
 if (rootEle) {
@@ -12,12 +16,18 @@ if (rootEle) {
       path: "/",
       element: <App></App>,
     },
+    {
+      path: "/file-explorer",
+      element: <FileExplorer></FileExplorer>,
+    },
   ]);
 
   const root = ReactDOM.createRoot(rootEle);
   root.render(
     <React.StrictMode>
-      <RouterProvider router={router} />
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </React.StrictMode>
   );
 }
